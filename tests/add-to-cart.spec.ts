@@ -20,7 +20,8 @@ test('user can add a product to the cart', async ({ page }) => {
 
   // 6. Open the cart
   await page.locator('[data-test="shopping-cart-link"]').click();
+  await expect(page).toHaveURL(/cart/);
 
-  // 7. Verify the backpack is in the cart
-  await expect(page.locator('[data-test="inventory-item-name"]')).toHaveText('Sauce Labs Backpack');
+  // 7. Verify only the backpack is in the cart
+  await expect(page.locator('[data-test="cart-list"] [data-test="inventory-item-name"]')).toHaveText('Sauce Labs Backpack');
 });
